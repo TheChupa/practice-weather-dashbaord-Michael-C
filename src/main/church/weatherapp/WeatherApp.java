@@ -39,7 +39,7 @@ public class WeatherApp {
                         .retrieve()
                         .bodyToMono(WeatherResponse.class)
                         .block();
-                Main weatherMain = response.getMain(); // creates a Main object and runs the .getMain() on it, which sets weatherMain to the response
+                Main weatherMain = response.getMain(); // creates a Main object and runs the .getMain() on it, which sets weatherMain to the response Called a Wrapper class.
                 Weather description = response.getWeather().get(0); //creates a weather object and runs get.weather which runs the tostring method on the response. Have to use it like this because it's a list
 
                 System.out.println("----------------------------------");
