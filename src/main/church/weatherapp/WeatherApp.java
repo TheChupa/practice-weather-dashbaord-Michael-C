@@ -34,10 +34,10 @@ public class WeatherApp {
 
             } else if (Objects.equals(answerChoice, "1")) {
                 String city1 = "Kansas City";
-                WeatherResponse response = webClient.get()
+                WeatherResponseWrapper response = webClient.get()
                         .uri("https://api.openweathermap.org/data/2.5/weather?q=" + city1 + "&appid=" + apiKey + "&units=imperial")
                         .retrieve()
-                        .bodyToMono(WeatherResponse.class)
+                        .bodyToMono(WeatherResponseWrapper.class)
                         .block();
                 Main weatherMain = response.getMain(); // creates a Main object and runs the .getMain() on it, which sets weatherMain to the response Called a Wrapper class.
                 Weather description = response.getWeather().get(0); //creates a weather object and runs get.weather which runs the tostring method on the response. Have to use it like this because it's a list
@@ -49,10 +49,10 @@ public class WeatherApp {
 
             } else if (Objects.equals(answerChoice, "2")) {
                 String city2 = "St Louis";
-                WeatherResponse response = webClient.get()
+                WeatherResponseWrapper response = webClient.get()
                         .uri("https://api.openweathermap.org/data/2.5/weather?q=" + city2 + "&appid=" + apiKey + "&units=imperial")
                         .retrieve()
-                        .bodyToMono(WeatherResponse.class)
+                        .bodyToMono(WeatherResponseWrapper.class)
                         .block();
                 Main weatherMain = response.getMain();
                 Weather description = response.getWeather().get(0);
@@ -76,13 +76,13 @@ public class WeatherApp {
                 }
 
                 try {
-                    WeatherResponse response = webClient.get()
+                    WeatherResponseWrapper response = webClient.get()
                             .uri("https://api.openweathermap.org/data/2.5/weather?q=" + cityCustom + "&appid=" + apiKey + "&units=imperial")
                             .retrieve()
                             .onStatus(status -> status.value() == 404, // checks the code that comes back
                                     clientResponse -> Mono.error(new RuntimeException("This city doesn't exist yet.")) // creates a new runtime Exception for a try/catch block
                             )
-                            .bodyToMono(WeatherResponse.class)
+                            .bodyToMono(WeatherResponseWrapper.class)
                             .block();
                     Main weatherMain = response.getMain();
 

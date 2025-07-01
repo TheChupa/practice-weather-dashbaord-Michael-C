@@ -2,7 +2,7 @@ package church.weatherapp;
 
 import java.util.List;
 
-public class WeatherResponse {
+public class WeatherResponseWrapper {
     private Main main;
     private List<Weather> weather;
 
