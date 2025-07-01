@@ -65,11 +65,15 @@ public class WeatherApp {
             } else if (Objects.equals(answerChoice, "3")) {
 
 
-                System.out.println("Enter a city name to find weather conditions or type `exit` to quit");
+                System.out.println("Enter a city name to find weather conditions or type `exit` to close");
                 String cityCustom = scanner.nextLine();
-
-
                 cityCustom = cityCustom.trim();
+
+                if(cityCustom.equalsIgnoreCase("exit")) {
+                    System.out.println("Bye Felcia");
+                    scanner.close();
+                    break;
+                }
 
                 try {
                     WeatherResponse response = webClient.get()
